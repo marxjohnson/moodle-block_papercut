@@ -50,7 +50,7 @@ class block_papercut extends block_base {
     }
 
     function get_content()  {
-        global $CFG,$USER;
+        global $CFG, $USER, $OUTPUT;
 
         if(has_capability('block/papercut:view', $this->context)) {
             $this->content = new stdClass;
@@ -61,17 +61,28 @@ class block_papercut extends block_base {
             $serverip = explode('.',$_SERVER['SERVER_ADDR']);
             $internal = address_in_subnet(getremoteaddr(),$serverip[0].'.'.$serverip[1]);
 
-            if($internal) {
-                $this->content->text .= '<script type="text/javascript" src="http://'.$CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port.'/content/widgets/widgets.js"></script>';
-            }
-            $this->content->text .= '<script type="text/javascript"> var pcUsername = "'. $USER->username .'"; var pcServerURL = \'http://'. $CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port.'\'; pcGetUserDetails(); </script>';
+            $strnobalance = get_string('nobalance', 'block_papercut');
+            $image = $OUTPUT->pix_icon('balance_not_available', $strnobalance, 'block_papercut');
+            $serverurl = 'http://'. $CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port;
+            $scriptattrs = array('type' => 'text/javascript');
+            $wisgetsattrs = $scriptattrs;
+            $widgetsattrs['src'] = $serverurl.'/content/widgets/widgets.js';
 
-            $this->content->text .= '<div id="widgetBalance" style="padding-left: 1.5em;"><img src="'.$CFG->wwwroot .'/blocks/papercut/pix/balance_not_avaliable.png" /><!-- User Balance widget will be rendered here --></div>';
-            $this->content->text .= '<div id="widgetEnvironment" style="padding-left: 1.5em;"><!-- Environmental Impact widget will be rendered here --></div>';
+            $script1 = "var pcUsername = '$USER->username'; 
+                var pcServerURL = '$serverurl'; pcGetUserDetails();";
+            $script2 = "pcInitUserEnvironmentalImpactWidget('widgetEnvironment');
+                    pcInitUserBalanceWidget('widgetBalance');";
+
+            if($internal) {
+                $this->content->text .= html_writer::tag('script', '', $widgetsattrs); 
+            }
+            $this->content->text .= html_writer::tag('script', $script1, $scriptattrs);
+
+            $this->content->text .= html_writer::tag('div', $image, array('id' => 'widgetBalance'));
+            $this->content->text .= html_writer::empty_tag('div', array('id' => 'widgetEnvironment'));
 
             if ($internal)  {
-                $this->content->text .= '<script type="text/javascript"> pcInitUserEnvironmentalImpactWidget(\'widgetEnvironment\');</script>';
-                $this->content->text .= '<script type="text/javascript"> pcInitUserBalanceWidget(\'widgetBalance\'); </script>';
+                $this->content->text .= html_writer::tag('script', $script2, $scriptattrs);
             }
 
             return $this->content;

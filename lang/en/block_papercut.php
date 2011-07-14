@@ -32,4 +32,6 @@ $string['clientserverurl'] =  'Please enter the url of the papercut server. (htt
 
 $string['serverport'] =  'Server Port';
 $string['clientserverport'] =  'Please enter the port for the papercut server.';
+
+$string['nobalance'] = 'Printing Balance Not Available';
 ?> 
