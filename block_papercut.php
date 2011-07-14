@@ -27,7 +27,6 @@
 		function init()
 		{
 			$this->title = get_string('blockname', 'block_papercut');
-			$this->version = 2009070500;
 		}
 
 		function specialization()
@@ -64,8 +63,8 @@
 		function get_content()
 		{
 			global $CFG,$USER;
-
-			if(!isguest($USER->id) && $USER->username<>"admin")
+                        
+			if(has_capability('block/papercut:view', $this->context))
 			{
 				$this->content = new stdClass;
         		$this->content->footer = '';

@@ -20,6 +20,7 @@
 *      If not, see <http://www.gnu.org/licenses/>
 *
 ********************************************************************************************************************/  
+$string['pluginname'] = 'PaperCut Print Quotas';
 $string['blockname'] = 'PaperCut Print Quotas';
 $string['blockmenutitle'] = 'Printing Quota';
 
