@@ -45,4 +45,12 @@ $settings->add(new admin_setting_configtext(
     PARAM_RAW
 ));
 
+$settings->add(new admin_setting_configcheckbox(
+    'block_papercut_https',
+    get_string('usehttps', 'block_papercut'),
+    get_string('clientusehttps', 'block_papercut'),
+    0,
+    PARAM_BOOL
+));
+
 ?>

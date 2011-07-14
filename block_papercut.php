@@ -63,7 +63,8 @@ class block_papercut extends block_base {
 
             $strnobalance = get_string('nobalance', 'block_papercut');
             $image = $OUTPUT->pix_icon('balance_not_available', $strnobalance, 'block_papercut');
-            $serverurl = 'http://'. $CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port;
+            $http = $CFG->block_papercut_https ? 'https://' : 'http://';
+            $serverurl = $http.$CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port;
             $scriptattrs = array('type' => 'text/javascript');
             $wisgetsattrs = $scriptattrs;
             $widgetsattrs['src'] = $serverurl.'/content/widgets/widgets.js';

@@ -33,5 +33,9 @@ $string['clientserverurl'] =  'Please enter the url of the papercut server. (htt
 $string['serverport'] =  'Server Port';
 $string['clientserverport'] =  'Please enter the port for the papercut server.';
 
+$string['usehttps'] = 'Use HTTPS';
+$string['clientusehttps'] = 'Use HTTPS for the connection to the Papercut server? You\'ll need to have set up an SSL certificate already';
+
 $string['nobalance'] = 'Printing Balance Not Available';
+
 ?> 
