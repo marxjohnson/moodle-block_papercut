@@ -21,98 +21,79 @@
 *
 ********************************************************************************************************************/
 
-    class block_papercut extends block_base
-	{
+class block_papercut extends block_base {
 
-		function init()
-		{
-			$this->title = get_string('blockname', 'block_papercut');
-		}
+    function init() {
+        $this->title = get_string('blockname', 'block_papercut');
+    }
 
-		function specialization()
-		{
-			global $CFG;
+    function specialization() {
+        global $CFG;
 
-			if (!empty($this->config) && !empty($this->config->title))
-			{
-		            // There is a customized block title, display it
-		            $this->title = $this->config->title;
-		       }
-			else
-			{
-			     $this->title = $CFG->block_papercut_title;
-		    }
-		}
+        if (!empty($this->config) && !empty($this->config->title)) {
+            // There is a customized block title, display it
+            $this->title = $this->config->title;
+        } else {
+             $this->title = $CFG->block_papercut_title;
+        }
+    }
 
+    function format_title($title, $max = 64) {
 
-    	function format_title($title,$max=64)
-		{
+        $textlib = textlib_get_instance();
 
-			$textlib = textlib_get_instance();
+        if ($textlib->strlen($title) <= $max) {
+            return s($title);
+        } else {
+            return s($textlib->substr($title,0,$max-3).'...');
+        }
+    }
 
-        	if ($textlib->strlen($title) <= $max)
-			{
-		    	return s($title);
-		    }
-			else
-			{
-            	return s($textlib->substr($title,0,$max-3).'...');
-        	}
-    	}
+    function get_content()  {
+        global $CFG,$USER;
 
-		function get_content()
-		{
-			global $CFG,$USER;
-                        
-			if(has_capability('block/papercut:view', $this->context))
-			{
-				$this->content = new stdClass;
-        		$this->content->footer = '';
-			    $this->content->items = array();
-			    $this->content->icons = array();
+        if(has_capability('block/papercut:view', $this->context)) {
+            $this->content = new stdClass;
+            $this->content->footer = '';
+            $this->content->items = array();
+            $this->content->icons = array();
 
-				$serverip =  explode('.',$_SERVER['SERVER_ADDR']);
-				$internal = address_in_subnet(getremoteaddr(),$serverip[0].'.'.$serverip[1]);
+            $serverip = explode('.',$_SERVER['SERVER_ADDR']);
+            $internal = address_in_subnet(getremoteaddr(),$serverip[0].'.'.$serverip[1]);
 
-				if (strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6')>0)
-				{
-					if($internal)
-					{
-						$this->content->text .= require_js($CFG->wwwroot .'/blocks/papercut/lib/supersleight.js');
-						$this->content->text .= require_js($CFG->wwwroot .'/blocks/papercut/lib/supersleight-min.js');
-						$this->content->text .= '<script type="text/javascript">  $(function() { $(\'body\').supersleight({shim: \'http://'.$CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port.'/css/pngHack/transparent.gif\' }); </script>';
-						if(!file_exists($CFG->wwwroot .'/x.gif'))
-						{
-							copy($CFG->wwwroot .'/blocks/papercut/pix/x.gif',$CFG->wwwroot .'/x.gif');
-						}
-					}
-				}
-				if($internal)
-				{
-					$this->content->text .= '<script type="text/javascript" src="http://'.$CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port.'/content/widgets/widgets.js"></script>';
-				}
-				$this->content->text .= '<script type="text/javascript"> var pcUsername = "'. $USER->username .'"; var pcServerURL = \'http://'. $CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port.'\'; pcGetUserDetails(); </script>';
+            if (strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6') > 0) {
+                if($internal) {
+                    $this->content->text .= require_js($CFG->wwwroot .'/blocks/papercut/lib/supersleight.js');
+                    $this->content->text .= require_js($CFG->wwwroot .'/blocks/papercut/lib/supersleight-min.js');
+                    $this->content->text .= '<script type="text/javascript">  $(function() { $(\'body\').supersleight({shim: \'http://'.$CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port.'/css/pngHack/transparent.gif\' }); </script>';
+                    if(!file_exists($CFG->wwwroot .'/x.gif')) {
+                        copy($CFG->wwwroot .'/blocks/papercut/pix/x.gif',$CFG->wwwroot .'/x.gif');
+                    }
+                }
+            }
 
-				$this->content->text .= '<div id="widgetBalance" style="padding-left: 1.5em;"><img src="'.$CFG->wwwroot .'/blocks/papercut/pix/balance_not_avaliable.png" /><!-- User Balance widget will be rendered here --></div>';
-				$this->content->text .= '<div id="widgetEnvironment" style="padding-left: 1.5em;"><!-- Environmental Impact widget will be rendered here --></div>';
+            if($internal) {
+                $this->content->text .= '<script type="text/javascript" src="http://'.$CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port.'/content/widgets/widgets.js"></script>';
+            }
+            $this->content->text .= '<script type="text/javascript"> var pcUsername = "'. $USER->username .'"; var pcServerURL = \'http://'. $CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port.'\'; pcGetUserDetails(); </script>';
 
-				if ($internal)
-				{
-					$this->content->text .= '<script type="text/javascript"> pcInitUserEnvironmentalImpactWidget(\'widgetEnvironment\');</script>';
-					$this->content->text .= '<script type="text/javascript"> pcInitUserBalanceWidget(\'widgetBalance\'); </script>';
-				}
+            $this->content->text .= '<div id="widgetBalance" style="padding-left: 1.5em;"><img src="'.$CFG->wwwroot .'/blocks/papercut/pix/balance_not_avaliable.png" /><!-- User Balance widget will be rendered here --></div>';
+            $this->content->text .= '<div id="widgetEnvironment" style="padding-left: 1.5em;"><!-- Environmental Impact widget will be rendered here --></div>';
 
-				return $this->content;
-			}
-		}
+            if ($internal)  {
+                $this->content->text .= '<script type="text/javascript"> pcInitUserEnvironmentalImpactWidget(\'widgetEnvironment\');</script>';
+                $this->content->text .= '<script type="text/javascript"> pcInitUserBalanceWidget(\'widgetBalance\'); </script>';
+            }
 
-		function instance_allow_config()
-		{
-		     return true;
-		}
+            return $this->content;
+        }
+    }
 
-		function has_config() {return true;}
+    function instance_allow_config() {
+         return true;
+    }
 
+    function has_config() {return true;}
 
 }
 ?>
