@@ -70,13 +70,13 @@ class block_papercut extends block_base {
             $wisgetsattrs = $scriptattrs;
             $widgetsattrs['src'] = $serverurl.'/content/widgets/widgets.js';
 
-            $script1 = "var pcUsername = '$USER->username'; 
+            $script1 = "var pcUsername = '$USER->username';
                 var pcServerURL = '$serverurl'; pcGetUserDetails();";
             $script2 = "pcInitUserEnvironmentalImpactWidget('widgetEnvironment');
                     pcInitUserBalanceWidget('widgetBalance');";
 
             if($internal) {
-                $this->content->text .= html_writer::tag('script', '', $widgetsattrs); 
+                $this->content->text .= html_writer::tag('script', '', $widgetsattrs);
             }
             $this->content->text .= html_writer::tag('script', $script1, $scriptattrs);
 
