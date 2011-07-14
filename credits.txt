@@ -1,0 +1,7 @@
+Credits
+===========================================================
+
+Chris @ PaperCut for his help with developing this block
+
+http://allinthehead.com/retro/338/supersleight-jquery-plugin
+For the supersleight javascript files.
