@@ -61,17 +61,6 @@ class block_papercut extends block_base {
             $serverip = explode('.',$_SERVER['SERVER_ADDR']);
             $internal = address_in_subnet(getremoteaddr(),$serverip[0].'.'.$serverip[1]);
 
-            if (strpos($_SERVER['HTTP_USER_AGENT'],'MSIE 6') > 0) {
-                if($internal) {
-                    $this->content->text .= require_js($CFG->wwwroot .'/blocks/papercut/lib/supersleight.js');
-                    $this->content->text .= require_js($CFG->wwwroot .'/blocks/papercut/lib/supersleight-min.js');
-                    $this->content->text .= '<script type="text/javascript">  $(function() { $(\'body\').supersleight({shim: \'http://'.$CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port.'/css/pngHack/transparent.gif\' }); </script>';
-                    if(!file_exists($CFG->wwwroot .'/x.gif')) {
-                        copy($CFG->wwwroot .'/blocks/papercut/pix/x.gif',$CFG->wwwroot .'/x.gif');
-                    }
-                }
-            }
-
             if($internal) {
                 $this->content->text .= '<script type="text/javascript" src="http://'.$CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port.'/content/widgets/widgets.js"></script>';
             }
