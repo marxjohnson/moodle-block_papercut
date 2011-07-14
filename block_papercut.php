@@ -6,7 +6,8 @@
 *	This file is part of PaperCut Block for Moodle.
 *
 *    	Papercut Block for Moodle.
-*    	Copyright (C) 2009 onwards Ian Tasker www.schoolsict.com
+*    	Original version Copyright (C) 2009 onwards Ian Tasker www.schoolsict.com
+*    	Moodle 2.x updates by Mark Johnson, Copyright 2011 onwards Taunton's College, UK
 *
 *    	This program is free software; you can redistribute it and/or modify it under the terms of the
 *    	GNU General Public License as published by the Free Software Foundation; either version 3 of the License,
