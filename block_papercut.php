@@ -81,7 +81,7 @@ class block_papercut extends block_base {
             $this->content->text .= html_writer::tag('script', $script1, $scriptattrs);
 
             $this->content->text .= html_writer::tag('div', $image, array('id' => 'widgetBalance'));
-            $this->content->text .= html_writer::empty_tag('div', array('id' => 'widgetEnvironment'));
+            $this->content->text .= html_writer::tag('div', '', array('id' => 'widgetEnvironment'));
 
             if ($internal)  {
                 $this->content->text .= html_writer::tag('script', $script2, $scriptattrs);
