@@ -1,26 +1,32 @@
 <?php
-/********************************************************************************************************************
-*
-*	NOTICE OF COPYRIGHT
-*
-*	This file is part of PaperCut Block for Moodle.
-*
-*    	PaperCut Block for Moodle.
-*    	Original version Copyright (C) 2009 onwards Ian Tasker www.schoolsict.com
-*    	Moodle 2.x updates by Mark Johnson, Copyright 2011 onwards Taunton's College, UK
-*
-*    	This program is free software; you can redistribute it and/or modify it under the terms of the
-*    	GNU General Public License as published by the Free Software Foundation; either version 3 of the License,
-*    	or (at your option) any later version.
-*
-*    	This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
-*    	without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-*    	See the GNU General Public License for more details.
-*
-*    	You should have received a copy of the GNU General Public License along with this program.
-*      If not, see <http://www.gnu.org/licenses/>
-*
-********************************************************************************************************************/
+// This file is part of Moodle - http://moodle.org/
+//
+// Moodle is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// Moodle is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+
+/**
+ * Defines settings for the Papercut block
+ *
+ * Allows configuration of the block title and the URL of the Papercut server.
+ *
+ * @package     block_papercut
+ * @author      Mark Johnson <mark.johnson@tauntons.ac.uk>
+ * @author      Ian Tasker
+ * @copyright   2010 onwards Tauntons College, UK
+ * @copyright   Original version Copyright (C) 2009 onwards Ian Tasker www.schoolsict.com
+ * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 
 $settings->add(new admin_setting_configtext(
     'block_papercut_title',
@@ -53,5 +59,3 @@ $settings->add(new admin_setting_configcheckbox(
     0,
     PARAM_BOOL
 ));
-
-?>
