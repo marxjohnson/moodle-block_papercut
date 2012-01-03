@@ -16,7 +16,7 @@
 
 
 /**
- * Defines the capabilities for the Quick Course List block
+ * Defines the capabilities for the Papercut block
  *
  * Defines block/papercut:view, which allows users to see the block
  *
