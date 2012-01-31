@@ -45,3 +45,5 @@ $string['clientusehttps'] = 'Use HTTPS for the connection to the Papercut server
     .'have set up an SSL certificate already';
 
 $string['nobalance'] = 'Printing Balance Not Available';
+
+$string['papercut:view'] = 'View priting balance and statistics';
