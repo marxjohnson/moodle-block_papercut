@@ -62,35 +62,31 @@ class block_papercut extends block_base {
             $this->content->footer = '';
             $this->content->items = array();
             $this->content->icons = array();
-
-            $serverip = explode('.', $_SERVER['SERVER_ADDR']);
-            $internal = address_in_subnet(getremoteaddr(), $serverip[0].'.'.$serverip[1]);
             $cfg = get_config('block_papercut');
 
             $strnobalance = get_string('nobalance', 'block_papercut');
             $image = $OUTPUT->pix_icon('balance_not_available', $strnobalance, 'block_papercut');
-            $scriptattrs = array('type' => 'text/javascript');
-            $wisgetsattrs = $scriptattrs;
-            $widgetsattrs['src'] = $serverurl.'/content/widgets/widgets.js';
-
-            $script1 = "var pcUsername = '$USER->username';"
-                ."var pcServerURL = '$serverurl'; pcGetUserDetails();";
-            $script2 = "pcInitUserEnvironmentalImpactWidget('widgetEnvironment');"
-                ."pcInitUserBalanceWidget('widgetBalance');";
-
-            if ($internal) {
-                $this->content->text .= html_writer::tag('script', '', $widgetsattrs);
-            }
-            $this->content->text .= html_writer::tag('script', $script1, $scriptattrs);
             $http = $cfg->https ? 'https://' : 'http://';
             $serverurl = $http.$cfg->server_url.':'.$cfg->server_port;
 
             $this->content->text .= html_writer::tag('div', $image, array('id' => 'widgetBalance'));
             $this->content->text .= html_writer::tag('div', '', array('id' => 'widgetEnvironment'));
 
-            if ($internal) {
-                $this->content->text .= html_writer::tag('script', $script2, $scriptattrs);
-            }
+            $jsmodule = array(
+                'name'  =>  'block_papercut',
+                'fullpath'  =>  '/blocks/papercut/module.js',
+                'requires'  =>  array('base', 'node')
+            );
+
+            $jsdata = array(
+                'serverurl' => $serverurl,
+                'username' => $USER->username
+            );
+
+            $this->page->requires->js_init_call('M.block_papercut.init',
+                                                $jsdata,
+                                                false,
+                                                $jsmodule);
 
             return $this->content;
         }
