@@ -26,8 +26,8 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$plugin->version = 2012013100;
+$plugin->version = 2012121500;
 $plugin->requires = 2010112400;
 $plugin->component = 'block_papercut';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '2.0.1 (Build: 2012013100)';
+$plugin->maturity = MATURITY_BETA;
+$plugin->release = '2.1 Beta';

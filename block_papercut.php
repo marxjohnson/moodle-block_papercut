@@ -39,7 +39,7 @@ class block_papercut extends block_base {
             // There is a customized block title, display it
             $this->title = $this->config->title;
         } else {
-             $this->title = $CFG->block_papercut_title;
+             $this->title = get_config('block_papercut', 'title');
         }
     }
 
@@ -65,11 +65,10 @@ class block_papercut extends block_base {
 
             $serverip = explode('.', $_SERVER['SERVER_ADDR']);
             $internal = address_in_subnet(getremoteaddr(), $serverip[0].'.'.$serverip[1]);
+            $cfg = get_config('block_papercut');
 
             $strnobalance = get_string('nobalance', 'block_papercut');
             $image = $OUTPUT->pix_icon('balance_not_available', $strnobalance, 'block_papercut');
-            $http = $CFG->block_papercut_https ? 'https://' : 'http://';
-            $serverurl = $http.$CFG->block_papercut_server_url.':'.$CFG->block_papercut_server_port;
             $scriptattrs = array('type' => 'text/javascript');
             $wisgetsattrs = $scriptattrs;
             $widgetsattrs['src'] = $serverurl.'/content/widgets/widgets.js';
@@ -83,6 +82,8 @@ class block_papercut extends block_base {
                 $this->content->text .= html_writer::tag('script', '', $widgetsattrs);
             }
             $this->content->text .= html_writer::tag('script', $script1, $scriptattrs);
+            $http = $cfg->https ? 'https://' : 'http://';
+            $serverurl = $http.$cfg->server_url.':'.$cfg->server_port;
 
             $this->content->text .= html_writer::tag('div', $image, array('id' => 'widgetBalance'));
             $this->content->text .= html_writer::tag('div', '', array('id' => 'widgetEnvironment'));

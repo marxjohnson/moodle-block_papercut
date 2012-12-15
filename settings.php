@@ -29,7 +29,7 @@
  */
 
 $settings->add(new admin_setting_configtext(
-    'block_papercut_title',
+    'block_papercut/title',
     get_string('title', 'block_papercut'),
     get_string('clienttitle', 'block_papercut'),
     "Printing Quota",
@@ -37,7 +37,7 @@ $settings->add(new admin_setting_configtext(
 ));
 
 $settings->add(new admin_setting_configtext(
-    'block_papercut_server_url',
+    'block_papercut/server_url',
     get_string('serverurl', 'block_papercut'),
     get_string('clientserverurl', 'block_papercut'),
     "",
@@ -45,7 +45,7 @@ $settings->add(new admin_setting_configtext(
 ));
 
 $settings->add(new admin_setting_configtext(
-    'block_papercut_server_port',
+    'block_papercut/server_port',
     get_string('serverport', 'block_papercut'),
     get_string('clientserverport', 'block_papercut'),
     "9191",
@@ -53,7 +53,7 @@ $settings->add(new admin_setting_configtext(
 ));
 
 $settings->add(new admin_setting_configcheckbox(
-    'block_papercut_https',
+    'block_papercut/https',
     get_string('usehttps', 'block_papercut'),
     get_string('clientusehttps', 'block_papercut'),
     0,
